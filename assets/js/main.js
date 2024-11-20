@@ -232,4 +232,30 @@
     })
   });
 
+  window.addEventListener('load', () => {
+    var birthDate = document.getElementById("birthDate").innerHTML;
+    const birthdayParts = birthDate.split(' ');
+    const months = { 
+      January: 0, February: 1, March: 2, April: 3, 
+      May: 4, June: 5, July: 6, August: 7, September: 8, October: 9,
+      November: 10, December: 11
+    };
+
+    const birthdayDate = new Date(birthdayParts[2], months[birthdayParts[0]], birthdayParts[1].replace(',', ''));
+
+    const currDate = new Date();
+    let age = currDate.getFullYear() - birthdayDate.getFullYear();
+    const monthDiff = currDate.getMonth() - birthdayDate.getMonth();
+    if(monthDiff < 0 || (monthDiff == 0 && currDate.getDate() < birthdayDate.getDate())){
+      age--;
+    }
+
+
+    const ageEle = document.getElementById("currentAge");
+    ageEle.innerHTML = age;
+
+    document.getElementById("AGE").innerText = age;
+
+  })
+
 })()
